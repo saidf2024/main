@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Navigation Bar</title>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    /* Background image with opacity */
+    background-image: url('background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: rgba(255, 255, 255, 0.5); /* Background color with opacity */
+}
+
+nav {
+    background-color: rgba(51, 51, 51, 0.8); /* RGBA color with opacity */
+    padding: 10px;
+    border-radius: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #555;
+}
+
+/* Style for content div */
+#content {
+    padding: 20px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.9); /* Background color with opacity */
+}
+
+/* Initially hide all content sections */
+#content > div {
+    display: none;
+}
+
+/* Show content section with animation */
+#content > div.active {
+    display: block;
+    animation: fadeEffect 0.5s ease-in-out forwards;
+}
+
+/* Animation for fading in and out */
+@keyframes fadeEffect {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Style for placards container */
+.placards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* Each placard takes equal width */
+    gap: 40px;
+}
+
+/* Style for images */
+.placard img {
+    max-width: 100%;
+    height: 80px;
+    border-radius: 15px;
+    opacity: .7;
+}
+
+/* Style for placards */
+.placard {
+    background-color: #000;
+    border-radius: 10px;
+    border-color: red;
+    border-width: 5px;
+    padding: 20px;
+    box-shadow: 0 40px 80px rgba(0, 10, 5, 0.1); /* Shadow effect */
+    opacity: 1;
+    transition: box-shadow 0.3s; /* Add transition effect */
+}
+
+.placard:hover {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.7); /* Glow effect on hover */
+}
+
+    /* Style for the iframe */
+    iframe {
+        border: none; /* Remove iframe border */
+        width: 100%; /* Make iframe fill its container horizontally */
+        height: 1000px; /* Set a fixed height for the iframe */
+        border-radius: 100px;
+        color: #592c2c64; /* Text color */
+        font-family: Arial, sans-serif; /* Font family */
+        font-size: 18px; /* Font size */
+        padding: 20px; /* Add padding to iframe content */
+    }
+
+/* Style for return to top arrow */
+/* Style for return to top arrow */
+#return-to-top {
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    background-color: #555;
+    color: #fff;
+    width: 60px; /* Increase width */
+    height: 60px; /* Increase height */
+    text-align: center;
+    font-size: 30px;
+    line-height: 55px; /* Center vertically */
+    border-radius: 50%;
+    display: none; /* Hide by default */
+    cursor: pointer;
+    z-index: 999; /* Ensure it's above other elements */
+    opacity: 0.8;
+}
+
+#return-to-top:hover {
+    background-color: #333;
+}
+
+</style>
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a href="#" onclick="showContent('home')">Home</a></li>
+        <li><a href="#" onclick="showContent('services')">Services</a></li>
+        <li><a href="#" onclick="showContent('about')">About us</a></li>
+        <li><a href="#" onclick="showContent('contact')">Contact us</a></li>
+    </ul>
+</nav>
+
+<!-- Content Divs -->
+<div id="content">
+    <div id="homeContent" class="active">
+        <h2>Home</h2>
+        <p>Welcome to our website!</p>
+    </div>
+    <div id="servicesContent">
+        <h2>Services</h2>
+        <div class="placards-container">
+            <div class="placard">
+                <img src="service1.svg" alt="Service 1">
+                <img src="service1-2.png" alt="Service 1-2">
+                <h3>FrontEnd</h3>
+                <p>Html, CSS & Vanilla Javascript</p>
+                <p>Node.js, React</p>
+            </div>
+            <div class="placard">
+                <img src="service2.png" alt="Service 2">
+                <img src="service2-2.png" alt="Service 2-2">
+                <h3>BackEnd</h3>
+                <p>Express.js, SQLite3, MongoDB, Python & AJAX</p>
+            </div>
+            <div class="placard">
+                <img src="service3.jpg" alt="Service 3">
+                <h3>Software development</h3>
+                <p>C C++ C# Python</p>
+            </div>
+        </div>
+    </div>
+    <div id="aboutContent">
+        <h2>About Us</h2>
+       
+        <iframe src="bio.html" frameborder="0" scrolling="no" width="100%" height="100%"></iframe>
+
+    </div>
+    <div id="contactContent">
+        <h2>Contact Us</h2>
+        <p>said.fa@protonmail.com</p>
+        <p>66 Grove ct 1441</p>
+        <p>Elgin, IL 60120</p>
+        
+    </div>
+    
+<!-- Return to Top Arrow -->
+<div id="return-to-top" onclick="returnToTop()">↑</div>
+
+</div>
+
+<script>
+function showContent(contentId) {
+    // Hide all content divs
+    var contentDivs = document.querySelectorAll('#content > div');
+    contentDivs.forEach(function(div) {
+        div.classList.remove('active');
+    });
+
+    // Show the selected content div
+    var selectedContent = document.getElementById(contentId + 'Content');
+    if (selectedContent) {
+        selectedContent.classList.add('active');
+    }
+}
+
+// Show or hide the return to top arrow based on scroll position
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+    var arrow = document.getElementById('return-to-top');
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        arrow.style.display = "block";
+    } else {
+        arrow.style.display = "none";
+    }
+}
+
+// Smooth scroll to the top of the page when the arrow is clicked
+function returnToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+</script>
+
+</body>
+</html>
