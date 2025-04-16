@@ -19,7 +19,7 @@ body {
 
 nav {
     background-color: rgba(51, 51, 51, 0.8); /* RGBA color with opacity */
-    padding: 10px;
+    padding: 30px;
     border-radius: 10px;
 }
 
@@ -48,6 +48,7 @@ nav ul li a:hover {
 
 nav ul li a.active-link {
     background-color: #777;
+    color: #fff
 }
 
 
@@ -152,10 +153,10 @@ nav ul li a.active-link {
 
 <nav>
     <ul>
-        <li><a href="#" onclick="showContent('home')">Home</a></li>
-        <li><a href="#" onclick="showContent('services')">Services</a></li>
-        <li><a href="#" onclick="showContent('about')">About us</a></li>
-        <li><a href="#" onclick="showContent('contact')">Contact us</a></li>
+        <li><a href="#" onclick="showContent('home', event)">Home</a></li>
+        <li><a href="#" onclick="showContent('services', event)">Services</a></li>
+        <li><a href="#" onclick="showContent('about', event)">About us</a></li>
+        <li><a href="#" onclick="showContent('contact', event)">Contact us</a></li>
     </ul>
 </nav>
 
@@ -220,6 +221,16 @@ function showContent(contentId) {
     var selectedContent = document.getElementById(contentId + 'Content');
     if (selectedContent) {
         selectedContent.classList.add('active');
+    }
+       // Remove active class from all nav links
+    var navLinks = document.querySelectorAll('nav ul li a');
+    navLinks.forEach(function(link) {
+        link.classList.remove('active-link');
+    });
+
+    // Add active class to the clicked link
+    if (event) {
+        event.target.classList.add('active-link');
     }
 }
 
