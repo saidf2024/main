@@ -4,22 +4,40 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>House of Tech</title>
+<title>BuildTech</title>
 <style>
-body {
-    margin: 0;
-    padding: 10px;
-    font-family: Arial, sans-serif;
-    /* Background image with opacity */
-    background-image: url('background.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-color: rgba(255, 255, 255, 0.5); /* Background color with opacity */
-}
+
 
 body, p {
     line-height: 1.6;
 }
+
+body {
+  position: relative;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  background-image: url('background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.bg-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* Adjust opacity here */
+  z-index: 0;
+}
+
+/* Push content above the overlay */
+nav, #content {
+  position: relative;
+  z-index: 1;
+}
+
 
 nav {
   position: relative;
@@ -70,9 +88,22 @@ nav ul li a.active-link {
 #content {
     padding: 40px;
     color: #fff;
-    background-color: rgba(0, 0, 0, 0.9); /* Background color with opacity */
+    background-color: rgba(0, 0, 0, 0.5); /* Background color with opacity */
+    border-radius: 20px;
+    backdrop-filter: blur(4px); /* Optional: blur effect for background */
 }
 
+.logo {
+  font-size: 34px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #717171; /* Build part */
+  margin-left: 50px;
+}
+
+.logo .tech {
+  color: #20033e; /* Tech part */
+}
 
 /* Show content section with animation */
 #content > div.active {
@@ -141,8 +172,8 @@ nav ul li a.active-link {
         height: 1000px; /* Set a fixed height for the iframe */
         border-radius: 100px;
         color: #592c2c64; /* Text color */
-        font-family: Arial, sans-serif; /* Font family */
-        font-size: 18px; /* Font size */
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 22px; /* Font size */
         padding: 20px; /* Add padding to iframe content */
     }
 
@@ -213,12 +244,16 @@ nav ul li a.active-link {
 </style>
 </head>
 <body>
+<body>
+  <div class="bg-overlay"></div>
+
 
     
 <nav>
-     
+     <a href="#" onclick="showContent('home', event)" class="logo">Build<span class="tech">Tech</span></a>
+
     <ul>
-        <li><a href="#" onclick="showContent('home', event)">Home</a></li>
+        
         <li><a href="#" onclick="showContent('services', event)">Services</a></li>
         <li><a href="#" onclick="showContent('about', event)">About us</a></li>
         <li><a href="#" onclick="showContent('contact', event)">Contact us</a></li>
