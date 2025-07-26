@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BuildTech</title>
+<style>
+
+
+body, p {
+    line-height: 1.6;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  background-image: url('background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.bg-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* Adjust opacity here */
+  z-index: 0;
+}
+
+/* Push content above the overlay */
+nav, #content {
+  position: relative;
+  z-index: 1;
+}
+
+
+nav {
+  position: relative;
+  z-index: 1000;
+  background-color: rgba(51, 51, 51, 0.9);
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+nav ul li a:hover,
+nav ul li a.active-link {
+  background-color: #777;
+  color: white;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+
+/* Style for content div */
+#content {
+    padding: 40px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.5); /* Background color with opacity */
+    border-radius: 20px;
+    backdrop-filter: blur(4px); /* Optional: blur effect for background */
+}
+
+.logo {
+  font-size: 34px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #beb8b8; /* Build part */
+  margin-left: 50px;
+}
+
+.logo .tech {
+  color: #5705af; /* Tech part */
+}
+
+/* Show content section with animation */
+#content > div.active {
+    display: block;
+    animation: fadeEffect 0.5s ease-in-out forwards;
+    opacity: 1;
+}
+
+#content > div {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    display: none;
+}
+
+/* Animation for fading in and out */
+@keyframes fadeEffect {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Style for placards container */
+.placards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* Each placard takes equal width */
+    gap: 40px;
+}
+
+.Aboutplacards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* Each placard takes equal width */
+    gap: 40px;
+}
+
+/* Style for images */
+.placard img {
+    max-width: 100%;
+    height: 80px;
+    border-radius: 30px;
+    opacity: .7;
+}
+
+/* Style for placards */
+.placard {
+    background-color: #00000066;
+    border-radius: 20px;
+    border-color: red;
+    border-width: 15px;
+    padding: 20px;
+    box-shadow: 0 40px 80px rgba(0, 10, 5, 0.1); /* Shadow effect */
+    opacity: .9;
+    transition: box-shadow 0.3s; /* Add transition effect */
+}
+
+.placard:hover {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.7); /* Glow effect on hover */
+}
+
+    /* Style for the iframe */
+    iframe {
+        border: none; /* Remove iframe border */
+        width: 100%; /* Make iframe fill its container horizontally */
+        height: 1000px; /* Set a fixed height for the iframe */
+        border-radius: 100px;
+        color: #592c2c64; /* Text color */
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 22px; /* Font size */
+        padding: 20px; /* Add padding to iframe content */
+    }
+
+/* Style for return to top arrow */
+/* Style for return to top arrow */
+#return-to-top {
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    background-color: #555;
+    color: #fff;
+    width: 60px; /* Increase width */
+    height: 60px; /* Increase height */
+    text-align: center;
+    font-size: 30px;
+    line-height: 55px; /* Center vertically */
+    border-radius: 50%;
+    display: none; /* Hide by default */
+    cursor: pointer;
+    z-index: 999; /* Ensure it's above other elements */
+    opacity: 0.8;
+}
+
+#return-to-top:hover {
+    background-color: #333;
+}
+
+/* Hamburger icon styles */
+.menu-toggle {
+    display: none;
+    font-size: 50px;
+    color: white;
+    cursor: pointer;
+}
+
+/* Responsive nav */@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  nav {
+    position: relative;
+  }
+
+  nav ul {
+    position: absolute;
+    top: 35px;
+    right: 0;
+    background-color: rgba(51, 51, 51, 0.95);
+    flex-direction: column;
+    align-items:center ;
+    padding: 15px;
+    border-radius: 20px;
+    display: none;
+    width: max-content; /* Fits only as wide as its content */
+  }
+
+  nav ul.showing {
+    display: flex;
+  }
+
+  nav ul li {
+    margin: 5px 5px;
+  }
+}
+
+
+</style>
+</head>
+<body>
+<body>
+  <div class="bg-overlay"></div>
+
+
+    
+<nav>
+     <a href="#" onclick="showContent('home', event)" class="logo">Build<span class="tech">Tech</span></a>
+
+    <ul>
+        
+        <li><a href="#" onclick="showContent('services', event)">Services</a></li>
+        <li><a href="#" onclick="showContent('about', event)">About us</a></li>
+        <li><a href="#" onclick="showContent('contact', event)">Contact us</a></li>
+    </ul>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+</nav>
+
+
+
+<!-- Content Divs -->
+<div id="content">
+    <div id="homeContent" class="active">
+        <h2>Home</h2>
+        <p>Welcome to our website!</p>
+    </div>
+    <div id="servicesContent">
+        <h2>Services</h2>
+        <div class="placards-container">
+            <div class="placard">
+                <img src="service1.svg" alt="Service 1">
+                <img src="service1-2.png" alt="Service 1-2">
+                <h3>FrontEnd</h3>
+                <p>Html, CSS & Vanilla Javascript</p>
+                <p>Node.js, React</p>
+            </div>
+            <div class="placard">
+                <img src="service2.png" alt="Service 2">
+                <img src="service2-2.png" alt="Service 2-2">
+                <h3>BackEnd</h3>
+                <p>AJAX, Express.js, SQLite3, MongoDB</p>
+                <p>Python Flask & Django</p>
+            </div>
+            <div class="placard">
+                <img src="service3.jpg" alt="Service 3">
+                <h3>Software development</h3>
+                <p>C, C++, C#, Python</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="aboutContent">
+        <h2>About Us</h2>
+        <div class="Aboutplacards-container">
+            <div class="placard">
+                <h3>Skills:</h3>
+                <p>HTML5, CSS3, JavaScript (ES6+)</p>
+                <p>Front-end frameworks like React</p>
+                <p>Back-end technologies such as Node.js, Express, Django and database systems (SQL and NoSQL)</p>
+                <p>RESTful APIs</p>
+                <p>version control systems (e.g., Git) and CI/CD pipelines</p>
+                <p>Responsive web design and cross-browser compatibility</p>
+            </div>
+        </div>
+    </div>
+
+        
+    <div id="contactContent">
+        <h2>Contact Us</h2>
+        <p>said.fa@protonmail.com</p>
+        <p></p>
+        <p></p>
+        <p></p>
+        
+    </div>
+    
+<!-- Return to Top Arrow -->
+<div id="return-to-top" onclick="returnToTop()">↑</div>
+
+</div>
+
+<script>
+function showContent(contentId) {
+    // Hide all content divs
+    var contentDivs = document.querySelectorAll('#content > div');
+    contentDivs.forEach(function(div) {
+        div.classList.remove('active');
+    });
+
+    // Show the selected content div
+    var selectedContent = document.getElementById(contentId + 'Content');
+    if (selectedContent) {
+        selectedContent.classList.add('active');
+    }
+       // Remove active class from all nav links
+    var navLinks = document.querySelectorAll('nav ul li a');
+    navLinks.forEach(function(link) {
+        link.classList.remove('active-link');
+    });
+
+    // Add active class to the clicked link
+    if (event) {
+        event.target.classList.add('active-link');
+    }
+
+    // Automatically hide nav menu on mobile after clicking
+    var navMenu = document.querySelector("nav ul");
+    if (window.innerWidth <= 768) {
+        navMenu.classList.remove("showing");
+    }
+}
+
+
+
+// Show or hide the return to top arrow based on scroll position
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+    var arrow = document.getElementById('return-to-top');
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        arrow.style.display = "block";
+    } else {
+        arrow.style.display = "none";
+    }
+}
+
+// Smooth scroll to the top of the page when the arrow is clicked
+function returnToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleMenu() {
+    var navMenu = document.querySelector("nav ul");
+    navMenu.classList.toggle("showing");
+}
+
+
+</script>
+
+</body>
+</html>
